@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using SteqoApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,11 @@ namespace SteqoApp.Commands
     internal class SetPathCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-
+        private readonly MainPageViewModel _viewModel;
+        public SetPathCommand(MainPageViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
         public bool CanExecute(object parameter)
         {
             return true;
@@ -18,7 +24,9 @@ namespace SteqoApp.Commands
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            _viewModel.ImagePath = openFileDialog.FileName;
         }
     }
 }
