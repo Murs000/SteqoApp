@@ -23,7 +23,19 @@ namespace SteqoApp.ViewModel
                 OnPropertyChanged(nameof(ImagePath));
             }
         }
-        public HideCommand Hide => new HideCommand();
+
+        private string _hidenText;
+        public string HidenText
+        {
+            get => _hidenText;
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged(nameof(HidenText));
+            }
+        }
+
+        public HideCommand Hide => new HideCommand(this);
         public ExtractCommand Extract => new ExtractCommand();
         public SetPathCommand SetPath => new SetPathCommand(this);
 

@@ -16,8 +16,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Margin="10" Grid.Row="0" Background="Green"/>
-            <Button Margin="10" Grid.Row="1" Background="Red"/>
+            <Button Margin="10" Grid.Row="0" Background="Green" Command="{Binding Extract}"/>
+            <Button Margin="10" Grid.Row="1" Background="Red" Command="{Binding Hide}"/>
         </Grid>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -34,7 +34,7 @@
                 <Button Margin="10" Grid.Column="0" Command="{Binding SetPath}"/>
                 <TextBlock Margin="10" Grid.Column="1" Text="{Binding ImagePath,Mode=TwoWay}" Foreground="Black"/>
             </Grid>
-            <TextBox Margin="10" Grid.Row="2"/>
+            <TextBox Margin="10" Grid.Row="2" Text="{Binding HidenText ,Mode=TwoWay}"/>
         </Grid>
     </Grid>
 </Window>
