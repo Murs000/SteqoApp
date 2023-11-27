@@ -30,7 +30,7 @@ namespace SteqoApp.ViewModel
             get => _hidenText;
             set
             {
-                _imagePath = value;
+                _hidenText = value;
                 OnPropertyChanged(nameof(HidenText));
             }
         }

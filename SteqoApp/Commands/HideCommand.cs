@@ -20,7 +20,7 @@ namespace SteqoApp.Commands
         }
         public bool CanExecute(object parameter)
         {
-            Bitmap bitmap = new Bitmap(_viewModel.ImagePath);
+            /*Bitmap bitmap = new Bitmap(_viewModel.ImagePath);
             string text = TextToBinary(_viewModel.HidenText);
             if (text.Length > bitmap.Height * bitmap.Width)
             {
@@ -29,7 +29,8 @@ namespace SteqoApp.Commands
             else
             {
                 return true;
-            }
+            }*/
+            return true;
         }
 
         public void Execute(object parameter)
@@ -40,6 +41,7 @@ namespace SteqoApp.Commands
             string textLenght = Convert.ToString(userText.Length, 2);
             string hideText = textLenght + secret + userText;
             Hide(bitmap, hideText);
+            bitmap.Save(_viewModel.ImagePath);
         }
         private void Hide(Bitmap bitmap,string str) 
         {
