@@ -50,17 +50,23 @@ namespace SteqoApp.Commands
                     string red = Convert.ToString(color.R, 2);
                     red = red.Remove(red.Length - 1, 1);
                     red = red + str[step];
+                    red = Convert.ToInt32(red,2).ToString();
                     step++;
 
                     string green = Convert.ToString(color.G, 2);
                     green = green.Remove(green.Length - 1, 1);
                     green = green + str[step];
+                    green = Convert.ToInt32(green, 2).ToString();
                     step++;
 
                     string blue = Convert.ToString(color.B, 2);
                     blue = blue.Remove(blue.Length - 1, 1);
                     blue = blue + str[step];
+                    blue = Convert.ToInt32(blue, 2).ToString();
                     step++;
+
+                    Color.FromArgb(color.A, Convert.ToInt32(red), Convert.ToInt32(green), Convert.ToInt32(blue));
+                    bitmap.SetPixel(i, j, color);
                 }
             }
             return step;
