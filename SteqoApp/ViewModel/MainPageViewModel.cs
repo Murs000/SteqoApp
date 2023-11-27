@@ -36,13 +36,18 @@ namespace SteqoApp.ViewModel
         }
 
         public HideCommand Hide => new HideCommand(this);
-        public ExtractCommand Extract => new ExtractCommand();
+        public ExtractCommand Extract => new ExtractCommand(this);
         public SetPathCommand SetPath => new SetPathCommand(this);
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public void Clear()
+        {
+            ImagePath = null;
+            HidenText = null;
         }
     }
 }
