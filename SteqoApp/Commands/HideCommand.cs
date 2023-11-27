@@ -36,40 +36,55 @@ namespace SteqoApp.Commands
         {
             Bitmap bitmap = new Bitmap(_viewModel.ImagePath);
             string secret = Convert.ToString(69621, 2);
-            string text = TextToBinary(_viewModel.HidenText);
-            int step = Hide(bitmap, secret,0);
-            Hide(bitmap, text, step);
+            string userText = TextToBinary(_viewModel.HidenText);
+            string textLenght = Convert.ToString(userText.Length, 2);
+            string hideText = textLenght + secret + userText;
+            Hide(bitmap, hideText);
         }
-        private int Hide(Bitmap bitmap,string str,int step) 
+        private void Hide(Bitmap bitmap,string str) 
         {
-            for (int i = 0; i < bitmap.Height; i++)
+            if (str.Length % 3 != 0)
             {
-                for (int j = 0; j < bitmap.Width; j++)
+                int lenght = str.Length / 3;
+                if(str.Length - lenght == 1)
                 {
-                    Color color = bitmap.GetPixel(i, j);
-                    string red = Convert.ToString(color.R, 2);
-                    red = red.Remove(red.Length - 1, 1);
-                    red = red + str[step];
-                    red = Convert.ToInt32(red,2).ToString();
-                    step++;
-
-                    string green = Convert.ToString(color.G, 2);
-                    green = green.Remove(green.Length - 1, 1);
-                    green = green + str[step];
-                    green = Convert.ToInt32(green, 2).ToString();
-                    step++;
-
-                    string blue = Convert.ToString(color.B, 2);
-                    blue = blue.Remove(blue.Length - 1, 1);
-                    blue = blue + str[step];
-                    blue = Convert.ToInt32(blue, 2).ToString();
-                    step++;
-
-                    Color.FromArgb(color.A, Convert.ToInt32(red), Convert.ToInt32(green), Convert.ToInt32(blue));
-                    bitmap.SetPixel(i, j, color);
+                    str = str + "0" + "0";
+                }
+                else
+                {
+                    str += "0";
                 }
             }
-            return step;
+            for (int step = 0; step < str.Length; step++)
+            {
+                for (int i = 0; i < bitmap.Height; i++)
+                {
+                    for (int j = 0; j < bitmap.Width; j++)
+                    {
+                        Color color = bitmap.GetPixel(i, j);
+                        string red = Convert.ToString(color.R, 2);
+                        red = red.Remove(red.Length - 1, 1);
+                        red = red + str[step];
+                        red = Convert.ToInt32(red, 2).ToString();
+                        step++;
+
+                        string green = Convert.ToString(color.G, 2);
+                        green = green.Remove(green.Length - 1, 1);
+                        green = green + str[step];
+                        green = Convert.ToInt32(green, 2).ToString();
+                        step++;
+
+                        string blue = Convert.ToString(color.B, 2);
+                        blue = blue.Remove(blue.Length - 1, 1);
+                        blue = blue + str[step];
+                        blue = Convert.ToInt32(blue, 2).ToString();
+                        step++;
+
+                        Color.FromArgb(color.A, Convert.ToInt32(red), Convert.ToInt32(green), Convert.ToInt32(blue));
+                        bitmap.SetPixel(i, j, color);
+                    }
+                }
+            }
         }
 
         private string TextToBinary(string text)
