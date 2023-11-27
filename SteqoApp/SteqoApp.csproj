@@ -63,6 +63,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\ExtractCommand.cs" />
+    <Compile Include="Commands\HideCommand.cs" />
+    <Compile Include="Commands\SetPathCommand.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>

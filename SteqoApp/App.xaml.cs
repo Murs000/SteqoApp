@@ -1,4 +1,5 @@
-﻿using SteqoApp.Views;
+﻿using SteqoApp.ViewModel;
+using SteqoApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,13 +16,11 @@ namespace SteqoApp
     /// </summary>
     public partial class App : Application
     {
-        MainPage window = new MainPage();
-
-        protected override void OnStartup(StartupEventArgs e)
+        public App()
         {
-            base.OnStartup(e);
-
-            MainWindow = window;
+            MainPage mainPage = new MainPage();
+            mainPage.DataContext = new MainPageViewModel();
+            MainWindow = mainPage;
             MainWindow.Show();
         }
     }
