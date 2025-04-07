@@ -3,38 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SteqoApp" xmlns:viewmodel="clr-namespace:SteqoApp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainPageViewModel}"
+        xmlns:local="clr-namespace:SteqoApp"
+        xmlns:viewmodel="clr-namespace:SteqoApp.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainPageViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="StegoApp - Hide and Extract Text" Height="550" Width="900"
+        Background="#f5f5f5" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="2*"/>
-            <ColumnDefinition Width ="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button Margin="10" Grid.Row="0" Background="Green" Command="{Binding Extract}" Content="Extract" FontSize="40" Foreground="White"/>
-            <Button Margin="10" Grid.Row="1" Background="Red" Command="{Binding Hide}" Content="Hide" FontSize="40" Foreground="White"/>
-        </Grid>
+
+        <!-- Left side: Image, path and message -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height ="5*"/>
-                <RowDefinition Height ="*"/>
-                <RowDefinition Height ="2*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Source="{Binding ImagePath,Mode=TwoWay}"/>
-            <Grid Grid.Row="1">
+
+            <!-- Image display -->
+            <Border Grid.Row="0" BorderBrush="#ccc" BorderThickness="1" CornerRadius="8" Margin="10">
+                <Image Source="{Binding ImagePath, Mode=TwoWay}" Stretch="Uniform"/>
+            </Border>
+
+            <!-- File path selector -->
+            <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Button Margin="10" Grid.Column="0" Command="{Binding SetPath}" Content="Path" FontSize="20"/>
-                <TextBlock Margin="10" Grid.Column="1" Text="{Binding ImagePath,Mode=TwoWay}" Foreground="Black"/>
+                <Button Grid.Column="0" Command="{Binding SetPath}" Content="📁 Choose Image" FontSize="16"
+                        Padding="8,4" Margin="0,0,10,0" Background="#007ACC" Foreground="White"/>
+                <TextBlock Grid.Column="1" Text="{Binding ImagePath, Mode=TwoWay}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="Gray"/>
             </Grid>
-            <TextBox Margin="10" Grid.Row="2" Text="{Binding HidenText ,Mode=TwoWay}"/>
+
+            <!-- Message input -->
+            <TextBox Grid.Row="2" Margin="10" Text="{Binding HidenText, Mode=TwoWay}" 
+                     FontSize="16" AcceptsReturn="True" TextWrapping="Wrap" 
+                     VerticalScrollBarVisibility="Auto" Height="100" Background="WhiteSmoke"/>
+
+            <!-- Disclaimer -->
+            <TextBlock Grid.Row="3" Margin="10,2,10,0" FontSize="12" Foreground="DarkRed" HorizontalAlignment="Left" Text="⚠️ Works only with .bmp images"/>
         </Grid>
+
+        <!-- Right side: Buttons -->
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
+            <Button Margin="0,0,0,20" Background="#28A745" Command="{Binding Extract}" 
+                    Content="🔍 Extract" FontSize="28" Foreground="White" Padding="10"/>
+            <Button Background="#DC3545" Command="{Binding Hide}" 
+                    Content="🛡 Hide" FontSize="28" Foreground="White" Padding="10"/>
+        </StackPanel>
     </Grid>
 </Window>
